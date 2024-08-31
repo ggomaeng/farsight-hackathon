@@ -137,9 +137,9 @@ app.transaction("/tx", middleware, async (c) => {
 
   return c.contract({
     abi: BOND_ABI,
-    chainId: "eip155:84532",
+    chainId: "eip155:8453",
     functionName: "createMultiToken",
-    to: getMintClubContractAddress("BOND", 84532),
+    to: getMintClubContractAddress("BOND", 8453),
     args: [
       {
         ...tokenParams,
