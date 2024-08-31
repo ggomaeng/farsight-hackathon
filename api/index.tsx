@@ -7,6 +7,7 @@ import {
   BOND_ABI,
   generateCreateArgs,
   getMintClubContractAddress,
+  mintclub,
 } from "mint.club-v2-sdk";
 import queryString from "query-string";
 import { generateQrCodeBase64 } from "../utils/qr.js";
@@ -63,7 +64,7 @@ app.frame("/", middleware, async (c) => {
   if (transactionId) {
     const qs = {
       text: "I minted a Based QR code!",
-      "embeds[]": ["https://basedqr.vercel.app/api/qr/username"],
+      "embeds[]": ["https://basedqr.vercel.app/share/username"],
     };
 
     const shareQs = queryString.stringify(qs);
@@ -115,6 +116,8 @@ app.transaction("/tx", middleware, async (c) => {
   const name = `Based QR ${username}`;
   const symbol = `based-qr-${Date.now()}`;
 
+  const creationFee = await mintclub.network("base").bond.getCreationFee();
+
   const { tokenParams, bondParams } = generateCreateArgs({
     name,
     symbol,
@@ -147,11 +150,12 @@ app.transaction("/tx", middleware, async (c) => {
       },
       bondParams,
     ],
+    value: creationFee,
   });
 });
 
 // share frame
-app.frame("/:username", middleware, async (c) => {
+app.frame("/share/:username", middleware, async (c) => {
   const username = c.req.param("username");
   return c.res({
     image: <img src={`/api/qr/${username}`} width={"100%"} height={"100%"} />,
