@@ -64,7 +64,9 @@ app.frame("/", middleware, async (c) => {
   if (transactionId) {
     const qs = {
       text: "I minted a Based QR code!",
-      "embeds[]": ["https://basedqr.vercel.app/share/username"],
+      "embeds[]": [
+        `https://basedqr.vercel.app/share/${c.var.interactor?.username}`,
+      ],
     };
 
     const shareQs = queryString.stringify(qs);
