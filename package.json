@@ -1,0 +1,25 @@
+{
+  "name": "farsight-hackathon",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "frog vercel-build",
+    "dev": "frog dev",
+    "deploy": "vercel"
+  },
+  "dependencies": {
+    "frog": "latest",
+    "hono": "^4",
+    "mint.club-v2-sdk": "^1.0.4",
+    "qrcode": "^1.5.4",
+    "query-string": "^9.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.5.1",
+    "@types/qrcode": "^1.5.5",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.7.1",
+    "typescript": "^5.5.4",
+    "vercel": "^32.4.1"
+  }
+}
